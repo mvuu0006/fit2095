@@ -8,7 +8,15 @@ let authorSchema = mongoose.Schema({
         },
         lastName: String
     },
-    dob: Date,
+    dob: {
+        type: Date,
+        validate: {
+            validator: function (birthdate) {
+                return birthdate <= Date.now
+            },
+            message: 'Date of birth should not be in the future'
+        },
+    },
     address: {
         state: {
             type: String,
