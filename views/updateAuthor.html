@@ -1,0 +1,39 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="document.location='/'">HOME</button>
+        <button onclick="document.location='/addbook'">Add a book</button>
+        <button onclick="document.location='/addauthor'">Add an author</button>
+        <button onclick="document.location='/getallbooks'">Books list</button>
+        <button onclick="document.location='/getallauthors'">Authors list</button>
+        <button onclick="document.location='/deletebook'">Delete a book</button>
+    </div>
+<form action="/updateauthordata" method="POST">
+  <div class="container">
+    <h1>Update an Author's number of books</h1>
+    <p>Please fill in this form to update an author's numBooks.</p>
+    <hr>
+
+    <label for="id"><b>Author ID</b></label>
+    <input type="text" placeholder="Enter ID of Author" name="id" id="id">
+
+    <label for="newNumBooks"><b>New number of books</b></label>
+    <input type="number" placeholder="Enter new number of books" name="newNumBooks" id="newNumBooks">
+    <hr>
+
+    <button type="submit" class="addbtn">Submit</button>
+  </div>
+  
+</form>
+
+</body>
+</html>

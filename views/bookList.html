@@ -1,0 +1,50 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <button onclick="document.location='/'">HOME</button>
+        <button onclick="document.location='/addbook'">Add a book</button>
+        <button onclick="document.location='/addauthor'">Add an author</button>
+        <button onclick="document.location='/getallauthors'">Authors list</button>
+        <button onclick="document.location='/updateauthor'">Update author's numBooks</button>
+        <button onclick="document.location='/deletebook'">Delete a book</button>
+    </div>
+
+    <h3>List of books:
+        <table id="custom-table">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date of publication</th>
+                <th>ISBN</th>
+                <th>Summary</th>
+            </tr>
+            <% for ( let i = 0; i< booksDb.length;i++){ %>
+                <tr>
+                    <td>
+                        <%= i+1 %>
+                    </td>
+                    <td>
+                        <%= booksDb[i].title %>
+                    </td>
+                    <td>
+                        <%= booksDb[i].author.name.firstName + " " + booksDb[i].author.name.lastName %>
+                    </td>
+                    <td>
+                        <%= booksDb[i].created %>
+                    </td>
+                    <td>
+                        <%= booksDb[i].isbn %>
+                    </td>
+                    <td>
+                        <%= booksDb[i].summary %>
+                    </td>
+                </tr>
+                <% }%>
+     </table>
+    </h3>
+</body>
+</html>
