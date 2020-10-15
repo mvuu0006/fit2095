@@ -26,7 +26,7 @@ export class DatabaseService {
     return this.http.put(url, data, httpOptions);
   }
   deleteActor(id) {
-    let url = "/actors/" + id;
+    let url = "/actors/actorById/" + id;
     return this.http.delete(url, httpOptions);
   }
   createMovie(data) {
