@@ -21,7 +21,7 @@ export class ActorComponent implements OnInit {
   movieId: string = "";
   movieYearToDelete: number = 0;
 
-  actorID: string = "";
+  addActorID: string = "";
 
   constructor(private dbService: DatabaseService) {}
 
@@ -102,14 +102,14 @@ export class ActorComponent implements OnInit {
   }
 
   //Select actor to add to a movie
-  onSelectActor(item) {
-    this.actorID = item;
+  onSelectActorToAdd(item) {
+    this.addActorID = item;
     this.changeSection(9);
   }
 
   //Add actor to movie
   onAddActorToMovie(item) {
-    this.dbService.addActorToMovie({id: this.actorID}, item).subscribe(result => {
+    this.dbService.addActorToMovie({id: this.addActorID}, item).subscribe(result => {
       this.onGetMovies();
     });
   }
