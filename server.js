@@ -16,7 +16,7 @@ app.listen(8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-mongoose.connect('mongodb://localhost/movies', function (err) {
+mongoose.connect('mongodb://localhost:27017/movies', function (err) {
     if (err) {
         return console.log('Mongoose - connection error:', err);
     }
