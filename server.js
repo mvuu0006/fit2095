@@ -6,7 +6,9 @@ const actors = require('./routers/actor');
 const movies = require('./routers/movie');
 let path = require('path');
 
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 app.listen(8080);
 

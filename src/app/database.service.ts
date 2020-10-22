@@ -12,39 +12,39 @@ export class DatabaseService {
   result: any;
 
   getActors() {
-    return this.http.get("/actors");
+    return this.http.get("http://localhost:8080/actors");
   }
   getActor(id: string) {
-    let url = "/actors/" + id;
+    let url = "http://localhost:8080/actors/" + id;
     return this.http.get(url);
   }
   createActor(data) {
-    return this.http.post("/actors", data, httpOptions);
+    return this.http.post("http://localhost:8080/actors", data, httpOptions);
   }
   updateActor(id, data) {
-    let url = "/actors/" + id;
+    let url = "http://localhost:8080/actors/" + id;
     return this.http.put(url, data, httpOptions);
   }
   deleteActor(id) {
-    let url = "/actors/actorById/" + id;
+    let url = "http://localhost:8080/actors/actorById/" + id;
     return this.http.delete(url, httpOptions);
   }
   createMovie(data) {
-    return this.http.post("/movies", data, httpOptions);
+    return this.http.post("http://localhost:8080/movies", data, httpOptions);
   }
   getMovies() {
-    return this.http.get("/movies");
+    return this.http.get("http://localhost:8080/movies");
   }
   deleteMovie(id) {
-    let url = "/movies/byId/" + id;
+    let url = "http://localhost:8080/movies/byId/" + id;
     return this.http.delete(url, httpOptions);
   }
   deleteMovieByYear(year) {
-    let url = "/movies/byYear/" + year;
+    let url = "http://localhost:8080/movies/byYear/" + year;
     return this.http.delete(url, httpOptions);
   }
   addActorToMovie(actor, movie) {
-    let url = '/movies/' + movie._id + '/actors';
+    let url = 'http://localhost:8080/movies/' + movie._id + '/actors';
     return this.http.post(url, actor, httpOptions);
   }     
 }

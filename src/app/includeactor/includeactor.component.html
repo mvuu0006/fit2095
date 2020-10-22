@@ -1,0 +1,39 @@
+<div class="section">
+    <table class="table table-striped">
+      <tr>
+        <th>Name</th>
+        <th>Birth Year</th>
+        <th>Select?</th>
+      </tr>
+      <tr *ngFor="let item of actorsDB">
+        <td>{{item.name}}</td>
+        <td>{{item.bYear}}</td>
+        <td><button type="submit" class="btn btn-primary" (click)="onSelectActor(item)">Select</button></td>
+      </tr>
+    </table>
+</div>
+
+<h4>
+  Selected Actor
+</h4>
+<div>Name: {{selectedActor.name}}</div>
+<div>Birth year: {{selectedActor.bYear}}</div>
+
+<div class="section" style="margin-top: 50px;">
+    <table class="table table-striped">
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Actors</th>
+        <th>Include Actor?</th>
+      </tr>
+      <tr *ngFor="let item of moviesDB">
+        <td>{{item.title}}</td>
+        <td>{{item.year}}</td>
+        <td><div *ngFor="let actor of item.actors">
+            {{actor.name}}
+        </div></td>
+        <td><button type="submit" class="btn btn-primary" (click)="onAddActorToMovie(item)">Select</button></td>
+      </tr>
+    </table>
+</div>
