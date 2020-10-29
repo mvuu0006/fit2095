@@ -1,0 +1,25 @@
+<div class="section">
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>{{pollObj.question}}</tr>
+  </thead>
+  <tr *ngFor="let option of pollObj.options">
+    <label for="options">
+      <input id="options" [value]='option.value' type="radio" name="enums" [(ngModel)]="pollValue">
+      {{option.text}}
+    </label>
+  </tr>
+  </table>
+<button (click)='vote()'>VOTE</button>
+</div>
+
+<div style="display: block;">
+  <canvas baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+</div>

@@ -1,50 +1,48 @@
-const bodyParser = require('body-parser');
-const express = require('express');
-const mongoose = require('mongoose');
+let express = require("express");
+let path = require("path");
+let app = express();
+let server = require("http").Server(app);
 
-const actors = require('./routers/actor');
-const movies = require('./routers/movie');
-let path = require('path');
+let io = require("socket.io").listen(server);
 
-const cors = require('cors');
-const app = express();
-app.use(cors());
+let port = 8080;
 
-app.listen(8080);
+let pollObj = {
+    question: "Select Your Favourite Component",
+    options: [
+      { text: "Angular", value: 0, count: 0 },
+      { text: "MongoDB", value: 1, count: 0 },
+      { text: "Express.js", value: 2, count: 0 },
+      { text: "Golang", value: 3, count: 0 },
+      { text: "Python", value: 4, count: 0 },
+      { text: "C#", value: 5, count: 0 },
+      { text: "PhP", value: 6, count: 0 },
+      { text: "C++", value: 7, count: 0 },
+    ],
+  };
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/", express.static(path.join(__dirname, "dist/chatApp")));
 
-mongoose.connect('mongodb://localhost:27017/movies', function (err) {
-    if (err) {
-        return console.log('Mongoose - connection error:', err);
-    }
-    console.log('Connect Successfully');
+io.on("connection", socket => {
+  console.log("new connection made from client with ID="+socket.id);
+  socket.emit("poll", pollObj);
 
+  socket.on("newVote", data => {
+    incPoll(data);
+    io.sockets.emit("newObj", pollObj);
+  });
 });
 
-app.use("/", express.static(path.join(__dirname, "dist/Week8")));
+server.listen(port, () => {
+  console.log("Listening on port " + port);
+});
 
-//Configuring Endpoints
-//Actor RESTFul endpoints 
-app.get('/actors', actors.getAll);
-app.post('/actors', actors.createOne);
-app.get('/actors/:id', actors.getOne);
-app.put('/actors/:id', actors.updateOne);
-app.post('/actors/:id/movies', actors.addMovie);
-app.delete('/actors/actorById/:id', actors.deleteOne);
-app.delete('/actors/movie/:id', actors.cascadeDeleteOne);
-app.delete('/actors/movieById/:actorid/:movieid', actors.removeMovie);
-app.delete('/actors/allmovies/:id', actors.deleteMovies);
-
-//Movie RESTFul  endpoints
-app.get('/movies', movies.getAll);
-app.post('/movies', movies.createOne);
-app.get('/movies/:id', movies.getOne);
-app.put('/movies/:id', movies.updateOne);
-app.delete('/movies/byId/:id', movies.deleteOne);
-//app.delete('/movies/:movieid/:actorid', movies.removeActor);
-app.post('/movies/:id/actors', movies.addActor);
-app.get('/movies/:startYear/:endYear', movies.getByYear);
-app.delete('/movies/byYear/:aYear', movies.deleteByYear);
+function incPoll(value) {
+    pollObj.options.forEach(element => {
+        if (element.value == value) {
+            element.count +=1 ;
+            return;
+        }
+    });
+}
